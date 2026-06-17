@@ -39,7 +39,7 @@ body {
 /* ── PORTADA ── */
 #cover {
   position: relative; height: 100vh; display: flex; 
-  align-items: center; justify-content: center; overflow: hidden; color: white;
+  align-items: center; justify-content: center; overflow: hidden; color: rose;
 }
 #cover-bg { 
     position: absolute;
@@ -69,7 +69,7 @@ body {
 #cover-content { position: relative; z-index: 2; padding: 20px; transform: translateY(70px); } 
 #cover h1 {
   font-family: var(--title-font);
-  font-size: clamp(3.5rem, 9vw, 6rem);
+  font-size: clamp(4rem, 9vw, 6rem);
   font-weight: 300;
   letter-spacing: 2px;
   line-height: 1;
@@ -253,7 +253,7 @@ section {
 </video>
     <div id="cover-overlay"></div>
     <div id="cover-content">
-        <span style="text-transform: uppercase; letter-spacing: 5px; font-size: 0.9rem; display: block; margin-bottom: 1.5rem;" id="t-eyebrow"></span>
+        <span style="text-transform: uppercase; letter-spacing: 5px; font-size: 2rem; display: block; margin-bottom: 1.5rem;" id="t-eyebrow"></span>
         <h1 id="t-names"></h1>
         <p id="t-cover-date" style="letter-spacing: 3px; font-size: 1.3rem; margin-top: 1rem;"></p>
     </div>
@@ -291,10 +291,10 @@ section {
 ═════════════════════════════════════════= */
 const CONFIG = {
     global: {
-        nombres: "Sofía & Martín",
-        frase: "¡NOS CASAMOS!",
+        nombres: "Sofía",
+        frase: "Mis XV, años",
         fecha: "",
-        fechaCuenta: new Date(2026, 12, 20, 17, 0),
+        fechaCuenta: new Date(2026, 11, 20, 17, 0),
         tipoPortada: "foto", // "foto", "video" o "diseno"
 
 fotoPort: "cover.jpg",
@@ -307,25 +307,25 @@ disenoPort: "floral.jpg",
         posicionVerticalMovil: 50
     },
 diseno: {
-   paleta: 11,
-   fuenteTitulo: 1,
-   fuenteTexto: 1,
+   paleta: 1,
+   fuenteTitulo:1,
+   fuenteTexto: 2,
    tamañoTitulo: "1.8rem", //de las secciones
    tamañoTexto: "1.2rem",  //de las secciones
    espacioTituloATexto: 30,
    espacioTextoABoton: 40,
 },
 textos: {
-    tituloHistoria: "Nuestro<br> Gran Día",
-   historia: `Hay momentos que se sueñan toda la vida… y hoy estamos a punto de vivir uno de ellos.
-Queremos invitarte a ser parte de nuestra historia y celebrar juntos este gran paso.`
+    tituloHistoria: "Llega la noche soñada",
+   historia: `Después de tantos sueños, planes y emoción, llegó el momento de celebrar una noche única. ✨
+Quiero que me acompañes a vivir una fiesta llena de risas, música, baile y momentos que recordaré para siempre. Tu presencia hará que este día sea aún más especial.`
 },
 
 eventos: {
     ceremonia: { 
-        mostrar: true,
+        mostrar: false,
         t: "Ceremonia",
-        f: "20 de diciembre",
+        f: "20 de noviembre",
         h: "17:00 Horas",
         l: "Iglesia San Francisco de Asís",
         d: "Cmno. Torres 3231, Montevideo",
@@ -335,7 +335,7 @@ eventos: {
     fiesta: { 
         mostrar: true,
         t: "Fiesta",
-        f: "20 de diciembre",
+        f: "20 de noviembre",
         h: "21:00 Horas",
         l: "Salón de Eventos Aurora Palace",
         d: "Avda Las Palmas 1212, Montevideo",
@@ -344,17 +344,17 @@ eventos: {
 },
 
 regalos: {
-    textoSeccion: "El mejor regalo es que estés presente, pero si deseas colaborar con nuestros sueños, tienes la info aquí:",
+    textoSeccion: "El mejor regalo es que estés presente, pero si deseas colaborar con mis sueños, tienes la info aquí:",
     textoModal: "Datos de cuenta colectiva",
-    titular: "Sofía y Martín",
+    titular: "Sofía 15 años",
     banco: "Santander",
     cuenta: "1234567890",
     ci: "1.234.567-8"
 },
 
 cierre: {
-    t: "¡Te esperamos!",
-    s: "Tu presencia es muy importante para nosotros."
+    t: "¡Te espero!",
+    s: "Tu presencia es muy importante para mí."
 },
 
 fotos: [
