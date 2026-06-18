@@ -6,7 +6,7 @@
 <title>Invitación Digital Premium</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link id="font-link" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Jost:wght@300;400&family=Great+Vibes&family=Parisienne&family=Allura&family=Alex+Brush&family=Cinzel:wght@400;500&family=Raleway:wght@300;400&family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+<link id="font-link" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Cinzel:wght@300;400;500&family=Cormorant+Garamond:wght@300;400&family=Great+Vibes&family=Jost:wght@300;400&family=Montserrat:wght@300;400;500&family=Nunito:wght@300;400&family=Parisienne&family=Playfair+Display:wght@300;400;500&family=Poppins:wght@300;400;500&family=Quicksand:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 /* ── VARIABLES DE DISEÑO ── */
@@ -14,7 +14,7 @@
   --bg-1: #FFFFFF;
   --bg-2: #EBDEDE;
   --accent: #D4A5A5; 
-  --title-color: ##B5104E;
+  --title-color: #B5104E;
   --text-color: #8A7575;
   --title-font: 'Cormorant Garamond', serif;
   --body-font: 'Jost', sans-serif;
@@ -26,6 +26,12 @@
   --espacio-texto-boton: 1.5rem;
   --pos-pc-vertical: 50%;
   --pos-movil-vertical: 50%;
+  --cover-content-width: 900px;
+  --cover-content-x: 0px;
+  --cover-content-y: 130px;
+  --cover-content-x-mobile: 0px;
+  --cover-content-y-mobile: 130px;
+  --cover-text-align: center;
 }
 
 /* ── RESET & BASE ── */
@@ -39,7 +45,7 @@ body {
 /* ── PORTADA ── */
 #cover {
   position: relative; height: 100vh; display: flex; 
-  align-items: center; justify-content: center; overflow: hidden; color: #B5104E;
+  align-items: center; justify-content: center; overflow: hidden; color: #FFFFFF;
 } 
 #cover-bg { 
     position: absolute;
@@ -66,13 +72,30 @@ body {
 }
 
 #cover-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); }
-#cover-content { position: relative; z-index: 2; padding: 20px; transform: translateY(130px); } 
+#cover-content {
+  position: relative;
+  z-index: 2;
+  width: min(90vw, var(--cover-content-width));
+  padding: 20px;
+  text-align: var(--cover-text-align);
+  transform: translate(var(--cover-content-x), var(--cover-content-y));
+}
+#t-eyebrow,
+#t-names,
+#t-cover-date {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: anywhere;
+}
 #cover h1 {
-  font-family: var(--title-font);
-  font-size: clamp(4rem, 9vw, 6rem);
-  font-weight: 300;
-  letter-spacing: 2px;
-  line-height: 1;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  #cover-content {
+    transform: translate(var(--cover-content-x-mobile), var(--cover-content-y-mobile));
+  }
 }
 
 /* ── ICONOS FLOTANTES ── */
@@ -201,11 +224,18 @@ a.btn {
 
 @media (min-width: 768px) { 
     .gallery-grid { grid-template-columns: repeat(4, 1fr); } 
-  /* ═════════ ORNAMENTOS DECORATIVOS ═════════ */
+}
+
+/* ═════════ ORNAMENTOS DECORATIVOS ═════════ */
 
 section {
     position: relative;
     overflow: hidden;
+}
+
+section > div {
+    position: relative;
+    z-index: 1;
 }
 
 /* capa base */
@@ -219,6 +249,12 @@ section {
     pointer-events: none;
     z-index: 0;
     animation: floatOrnamento 8s ease-in-out infinite;
+}
+
+.ornamento svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* posiciones */
@@ -253,9 +289,9 @@ section {
 </video>
     <div id="cover-overlay"></div>
     <div id="cover-content">
-        <span style="text-transform: uppercase; letter-spacing: 5px; font-size: 2rem; display: block; margin-bottom: 1.5rem;" id="t-eyebrow"></span>
+        <span id="t-eyebrow"></span>
         <h1 id="t-names"></h1>
-        <p id="t-cover-date" style="letter-spacing: 3px; font-size: 1.3rem; margin-top: 1rem;"></p>
+        <p id="t-cover-date"></p>
     </div>
     <div class="scroll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg></div>
 </div>
@@ -291,6 +327,7 @@ section {
 ═════════════════════════════════════════= */
 const CONFIG = {
     global: {
+        /* Para editar los textos y estilos de portada, usar el bloque "portada" de abajo */
         nombres: "Sofía",
         frase: "Mis XV años",
         fecha: "",
@@ -306,6 +343,71 @@ disenoPort: "floral.jpg",
         posicionVerticalPC: 35, 
         posicionVerticalMovil: 50
     },
+
+portada: {
+    /* Textos principales de la portada */
+    /* FUENTES: 1 Cormorant | 2 Great Vibes | 3 Playfair | 4 Jost | 5 Poppins | 6 Montserrat | 7 Quicksand | 8 Georgia | 9 Parisienne | 10 Allura | 11 Alex Brush | 12 Cinzel | 13 Raleway | 14 Nunito */
+    frase: {
+        mostrar: true,
+        texto: "Mis XV años",
+        fuente: 13,
+        color: "#FFFFFF",
+        tamaño: "2rem",
+        tamañoMovil: "1.35rem",
+        grosor: 300,
+        espaciadoLetras: "5px",
+        interlineado: "1.2",
+        mayusculas: true,
+        margenAbajo: "1.5rem",
+        moverDerechaIzquierda: 0,
+        moverArribaAbajo: 0,
+        sombra: "0 2px 12px rgba(0,0,0,0.25)"
+    },
+    nombre: {
+        mostrar: true,
+        texto: "Sofía",
+        fuente: 12,
+        color: "#B5104E",
+        tamaño: "clamp(4rem, 9vw, 6rem)",
+        tamañoMovil: "4rem",
+        grosor: 300,
+        espaciadoLetras: "2px",
+        interlineado: "1",
+        mayusculas: false,
+        margenAbajo: "1rem",
+        moverDerechaIzquierda: 0,
+        moverArribaAbajo: 0,
+        sombra: "0 3px 18px rgba(255,255,255,0.18)"
+    },
+    fecha: {
+        mostrar: false,
+        texto: "",
+        fuente: 13,
+        color: "#FFFFFF",
+        tamaño: "1.3rem",
+        tamañoMovil: "1rem",
+        grosor: 300,
+        espaciadoLetras: "3px",
+        interlineado: "1.3",
+        mayusculas: true,
+        margenArriba: "0.2rem",
+        moverDerechaIzquierda: 0,
+        moverArribaAbajo: 0,
+        sombra: "0 2px 12px rgba(0,0,0,0.25)"
+    },
+    cajaTexto: {
+        anchoMaximo: "900px",
+        alineacion: "center", // center, left o right
+        moverDerechaIzquierdaPC: 0,
+        moverArribaAbajoPC: 130,
+        moverDerechaIzquierdaMovil: 0,
+        moverArribaAbajoMovil: 130
+    },
+    fondo: {
+        oscurecer: "rgba(0,0,0,0.35)"
+    }
+},
+
 diseno: {
    paleta: 1,
    fuenteTitulo:12,
@@ -358,6 +460,26 @@ regalos: {
     banco: "Santander",
     cuenta: "1234567890",
     ci: "1.234.567-8"
+},
+
+ornamentos: {
+    secciones: {
+        mostrar: true, // Cambiar a false para ocultar los ornamentos
+        tipo: "floral", // floral, estrellas, ondas
+        color: "", // Dejar vacio para usar el color del boton de la paleta
+        opacidad: 0.08,
+        tamaño: 220,
+        posiciones: ["top-left", "bottom-right"],
+        excluirSecciones: [] // Ejemplo: ["galeria", "regalos"]
+    },
+    portada: {
+        mostrar: false,
+        tipo: "estrellas",
+        color: "#FFFFFF",
+        opacidad: 0.16,
+        tamaño: 180,
+        posiciones: ["top-left", "top-right"]
+    }
 },
 
 cierre: {
@@ -527,6 +649,61 @@ root.style.setProperty('--pos-movil-vertical', CONFIG.global.posicionVerticalMov
 root.style.setProperty('--espacio-titulo-texto', CONFIG.diseno.espacioTituloATexto + 'px');
 root.style.setProperty('--espacio-texto-boton', CONFIG.diseno.espacioTextoABoton + 'px');
 
+function valorCSS(valor, unidad = "px") {
+    if (valor === undefined || valor === null || valor === "") return "";
+    return typeof valor === "number" ? valor + unidad : valor;
+}
+
+function aplicarEstiloTextoPortada(elemento, configTexto, textoRespaldo, permiteAmpersand = false) {
+    if (!elemento || !configTexto || configTexto.mostrar === false) {
+        if (elemento) elemento.style.display = "none";
+        return;
+    }
+
+    const esMovil = window.matchMedia("(max-width: 767px)").matches;
+    const texto = configTexto.texto !== undefined ? configTexto.texto : textoRespaldo;
+
+    elemento.style.display = "block";
+    elemento.style.fontFamily = FUENTES[configTexto.fuente] || configTexto.fuente || FUENTES[CONFIG.diseno.fuenteTitulo];
+    elemento.style.color = configTexto.color || "#FFFFFF";
+    elemento.style.fontSize = esMovil && configTexto.tamañoMovil ? configTexto.tamañoMovil : configTexto.tamaño;
+    elemento.style.fontWeight = configTexto.grosor || 300;
+    elemento.style.letterSpacing = valorCSS(configTexto.espaciadoLetras);
+    elemento.style.lineHeight = configTexto.interlineado || "1";
+    elemento.style.textTransform = configTexto.mayusculas ? "uppercase" : "none";
+    elemento.style.marginTop = valorCSS(configTexto.margenArriba || 0);
+    elemento.style.marginBottom = valorCSS(configTexto.margenAbajo || 0);
+    elemento.style.textShadow = configTexto.sombra || "none";
+    elemento.style.transform = `translate(${valorCSS(configTexto.moverDerechaIzquierda || 0)}, ${valorCSS(configTexto.moverArribaAbajo || 0)})`;
+
+    if (permiteAmpersand) {
+        elemento.innerHTML = String(texto || "").replace(/&/g, "<em>&</em>");
+    } else {
+        elemento.innerText = texto || "";
+    }
+}
+
+function aplicarPortada() {
+    const portada = CONFIG.portada || {};
+    const cajaTexto = portada.cajaTexto || {};
+
+    root.style.setProperty('--cover-content-width', cajaTexto.anchoMaximo || '900px');
+    root.style.setProperty('--cover-content-x', valorCSS(cajaTexto.moverDerechaIzquierdaPC || 0));
+    root.style.setProperty('--cover-content-y', valorCSS(cajaTexto.moverArribaAbajoPC || 0));
+    root.style.setProperty('--cover-content-x-mobile', valorCSS(cajaTexto.moverDerechaIzquierdaMovil || 0));
+    root.style.setProperty('--cover-content-y-mobile', valorCSS(cajaTexto.moverArribaAbajoMovil || 0));
+    root.style.setProperty('--cover-text-align', cajaTexto.alineacion || 'center');
+
+    const overlay = document.getElementById('cover-overlay');
+    if (overlay && portada.fondo && portada.fondo.oscurecer) {
+        overlay.style.background = portada.fondo.oscurecer;
+    }
+
+    aplicarEstiloTextoPortada(document.getElementById('t-eyebrow'), portada.frase, CONFIG.global.frase);
+    aplicarEstiloTextoPortada(document.getElementById('t-names'), portada.nombre, CONFIG.global.nombres, true);
+    aplicarEstiloTextoPortada(document.getElementById('t-cover-date'), portada.fecha, CONFIG.global.fecha);
+}
+
 const coverBg = document.getElementById('cover-bg');
 const coverVideo = document.getElementById('cover-video');
 
@@ -547,9 +724,8 @@ if (CONFIG.global.tipoPortada === "video") {
     coverVideo.style.display = "none";
     coverBg.style.backgroundImage = `url('${CONFIG.global.fotoPort}')`;
 }
-document.getElementById('t-names').innerHTML = CONFIG.global.nombres.replace('&', '<em>&</em>');
-document.getElementById('t-eyebrow').innerText = CONFIG.global.frase;
-document.getElementById('t-cover-date').innerText = CONFIG.global.fecha;
+aplicarPortada();
+window.addEventListener("resize", aplicarPortada);
 
 const main = document.getElementById('main-content');
 const iconSet = {
@@ -612,6 +788,47 @@ if (CONFIG.playlist.mostrar) {
 }
 createSec('regalos', 'gift', 'Regalos', `<p>${CONFIG.regalos.textoSeccion}</p><button class="btn" onclick="openGiftModal()">Ver Datos</button>`);  
 createSec('cierre', 'heart', CONFIG.cierre.t, `<p>${CONFIG.cierre.s}</p><div style="width:120px; margin:2rem auto; color:var(--accent); opacity:0.5;"><svg viewBox="0 0 100 20" stroke="currentColor"><path d="M0 10 Q25 0 50 10 T100 10" fill="none"/></svg></div>`);
+
+const ORNAMENTOS = {
+    floral: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M60 108C46 84 38 64 60 12c22 52 14 72 0 96Z"/><path d="M60 72C42 62 28 48 18 26c24 5 42 20 42 46Z"/><path d="M60 72c18-10 32-24 42-46-24 5-42 20-42 46Z"/><path d="M60 98C44 92 30 83 16 66c22-2 39 7 44 32Z"/><path d="M60 98c16-6 30-15 44-32-22-2-39 7-44 32Z"/></svg>`,
+    estrellas: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M60 12l7 25 25 7-25 7-7 25-7-25-25-7 25-7 7-25Z"/><path d="M25 74l4 12 12 4-12 4-4 12-4-12-12-4 12-4 4-12Z"/><path d="M94 72l3 10 10 3-10 3-3 10-3-10-10-3 10-3 3-10Z"/></svg>`,
+    ondas: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 36c20-20 40 20 60 0s30-8 40 0"/><path d="M10 60c20-20 40 20 60 0s30-8 40 0"/><path d="M10 84c20-20 40 20 60 0s30-8 40 0"/></svg>`
+};
+
+function crearOrnamento(config, posicion, colorBase) {
+    const ornamento = document.createElement('div');
+    ornamento.className = `ornamento orn-${posicion}`;
+    ornamento.style.width = valorCSS(config.tamaño || 220);
+    ornamento.style.height = valorCSS(config.tamaño || 220);
+    ornamento.style.opacity = config.opacidad ?? 0.08;
+    ornamento.style.color = config.color || colorBase || colores.boton;
+    ornamento.innerHTML = ORNAMENTOS[config.tipo] || ORNAMENTOS.floral;
+    return ornamento;
+}
+
+function aplicarOrnamentos() {
+    const config = CONFIG.ornamentos || {};
+    const secciones = config.secciones || {};
+    const portada = config.portada || {};
+    const colorBase = colores.boton;
+
+    if (portada.mostrar) {
+        const cover = document.getElementById('cover');
+        (portada.posiciones || ["top-left", "top-right"]).forEach(posicion => {
+            cover.appendChild(crearOrnamento(portada, posicion, colorBase));
+        });
+    }
+
+    if (!secciones.mostrar) return;
+
+    const excluidas = secciones.excluirSecciones || [];
+    document.querySelectorAll('section').forEach(section => {
+        if (excluidas.includes(section.id)) return;
+        (secciones.posiciones || ["top-left", "bottom-right"]).forEach(posicion => {
+            section.appendChild(crearOrnamento(secciones, posicion, colorBase));
+        });
+    });
+}
 
 // --- LÓGICA DE FUNCIONAMIENTO ---
 function openLightbox(s) { document.getElementById('lightbox').querySelector('img').src = s; document.getElementById('lightbox').style.display = 'flex'; history.pushState({v:'lb'}, ""); }
