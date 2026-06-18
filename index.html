@@ -343,6 +343,14 @@ eventos: {
     }
 },
 
+playlist: {
+    mostrar: true, // Cambiar a false para ocultar esta seccion
+    titulo: "Playlist",
+    texto: "Ayudame a elegir las canciones que no pueden faltar",
+    boton: "playlist",
+    formulario: "https://docs.google.com/forms/d/e/FORM_ID/viewform"
+},
+
 regalos: {
     textoSeccion: "El mejor regalo es que estés presente, pero si deseas colaborar con mis sueños, tienes la info aquí:",
     textoModal: "Datos de cuenta colectiva",
@@ -553,7 +561,8 @@ const iconSet = {
     gift: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>`,
 star: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
 <path d="M12 2l2.8 6.2L22 9l-5 4.7L18.2 22 12 18.5 5.8 22 7 13.7 2 9l7.2-.8L12 2z"/>
-</svg>`
+</svg>`,
+music: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`
 };
 
 function createSec(id, icon, title, body) {
@@ -598,6 +607,9 @@ if (CONFIG.eventos.fiesta.mostrar) {
 CONFIG.fotos.forEach(f => g += `<div class="gallery-item" onclick="openLightbox('${f}')"><img src="${f}"></div>`);
 createSec('galeria', 'camera', 'Momentos', g + `</div>`);
 createSec('rsvp', 'star', 'Confirmación', `<p>Por favor, confirma tu asistencia antes del 10 de noviembre.</p><a href="https://wa.me/59899000000" target="_blank" class="btn">Confirmar WhatsApp</a>`);
+if (CONFIG.playlist.mostrar) {
+    createSec('playlist', 'music', CONFIG.playlist.titulo, `<p>${CONFIG.playlist.texto}</p><a href="${CONFIG.playlist.formulario}" target="_blank" class="btn">${CONFIG.playlist.boton}</a>`);
+}
 createSec('regalos', 'gift', 'Regalos', `<p>${CONFIG.regalos.textoSeccion}</p><button class="btn" onclick="openGiftModal()">Ver Datos</button>`);  
 createSec('cierre', 'heart', CONFIG.cierre.t, `<p>${CONFIG.cierre.s}</p><div style="width:120px; margin:2rem auto; color:var(--accent); opacity:0.5;"><svg viewBox="0 0 100 20" stroke="currentColor"><path d="M0 10 Q25 0 50 10 T100 10" fill="none"/></svg></div>`);
 
